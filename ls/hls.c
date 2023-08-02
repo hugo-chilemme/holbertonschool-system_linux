@@ -9,7 +9,7 @@
  * @path: the target repository
  * Return: error code, 0 success
  */
-void showDirectory(char *program_name, char *path)
+void showDirectory(char *program_name, char *path, int showPath)
 {
 	struct dirent *entry;
 	DIR *dir;
@@ -22,6 +22,10 @@ void showDirectory(char *program_name, char *path)
 		fprintf(stderr, "%s: cannot access %s: No such file or directory\n", program_name, path);
 		return;
 	}
+
+	if (showPath)
+		printf("%s:\n", path);
+
 	while ((entry = readdir(dir)))
 	{
 		if (entry->d_name[0] == '.')
@@ -51,11 +55,7 @@ int main(int argc, char *argv[])
 	{
 		for (; argc > 1 && argv_i < argc; argv_i++)
 		{
-			/** Display the path of repertory when he have multiple */
-			if (argc > 2)
-				printf("%s:\n", argv[argv_i]);
-
-			showDirectory(program_name, argv[argv_i]);
+			showDirectory(program_name, argv[argv_i], argc > 2);
 
 			/** Display another backspace when he have multiple repository */
 			if (argv_i != argc - 1)
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 
-	showDirectory(program_name, ".");
+	showDirectory(program_name, ".", 0);
 
 	return (0);
 }
