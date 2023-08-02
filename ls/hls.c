@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+/**
+ * showDirectory - Display all folders and file a repository
+ * @path: the target repository
+ * Return: Nothing
+ */
 void showDirectory(char *path)
 {
 	struct dirent *entry;
@@ -28,6 +34,8 @@ void showDirectory(char *path)
 
 /**
  * main - Function
+ * @argc: number of @argv
+ * @argv: argument passed in command line
  * Return: -1 for error, 0 for success
  */
 int main(int argc, char *argv[])
@@ -38,13 +46,13 @@ int main(int argc, char *argv[])
 	{
 		for (; argc > 1 && argv_i < argc; argv_i++)
 		{
-			// Display the path of repertory when he have multiple 
+			/** Display the path of repertory when he have multiple */
 			if (argc > 2)
 				printf("%s:\n", argv[argv_i]);
 
 			showDirectory(argv[argv_i]);
 
-			// Display another backspace when he have multiple repository
+			/** Display another backspace when he have multiple repository */
 			if (argv_i != argc - 1)
 				printf("\n");
 		}
