@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <dirent.h>
+#include <stdlib.h>
 #include <string.h>
 
 int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
@@ -19,8 +20,10 @@ int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
     {   
         printf("%s  ", entry->d_name);
     }
-
     printf("\n");
 
+    free(entry);
+    free(dir);
+    
     return (0);
 }
