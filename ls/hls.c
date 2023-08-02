@@ -9,7 +9,7 @@
  * @path: the target repository
  * Return: error code, 0 success
  */
-void showDirectory(char *program_name, char *path, int showPath)
+void showDirectory(char *program_name, char *path, int showPath, int backspace)
 {
 	struct dirent *entry;
 	DIR *dir;
@@ -37,6 +37,8 @@ void showDirectory(char *program_name, char *path, int showPath)
 	free(entry);
 	free(dir);
 
+	if (backspace)
+		printf("\n");
 	printf("\n");
 }
 
@@ -55,16 +57,12 @@ int main(int argc, char *argv[])
 	{
 		for (; argc > 1 && argv_i < argc; argv_i++)
 		{
-			showDirectory(program_name, argv[argv_i], argc > 2);
-
-			/** Display another backspace when he have multiple repository */
-			if (argv_i != argc - 1)
-				printf("\n");
+			showDirectory(program_name, argv[argv_i], argc > 2, argv_i != argc - 1);
 		}
 		return (0);
 	}
 
-	showDirectory(program_name, ".", 0);
+	showDirectory(program_name, ".", 0, 0);
 
 	return (0);
 }
