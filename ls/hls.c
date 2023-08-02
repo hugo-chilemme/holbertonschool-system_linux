@@ -13,17 +13,21 @@ void showDirectory(char *path)
 {
 	struct dirent *entry;
 	DIR *dir;
+	int count = 0;
 
 	dir = opendir(path);
 
 	if (!dir)
+	{
+		printf("%s\n", path);
 		return;
-
+	}
 	while ((entry = readdir(dir)))
 	{
 		if (entry->d_name[0] == '.')
 			continue;
 		printf("%s  ", entry->d_name);
+		count++;
 	}
 
 	free(entry);
