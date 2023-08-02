@@ -18,12 +18,14 @@ int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 
     while ((entry = readdir(dir)))
     {   
+        if (entry->d_name[0] == '.')
+            continue;
         printf("%s  ", entry->d_name);
     }
     printf("\n");
 
     free(entry);
     free(dir);
-    
+
     return (0);
 }
