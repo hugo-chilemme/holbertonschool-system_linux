@@ -3,29 +3,31 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
+/**
+ * main - Function
+ * Return: -1 for error, 0 for success
+ */
+int main(void)
 {
-    struct dirent *entry;
-    DIR *dir;
+	struct dirent *entry;
+	DIR *dir;
 
-    dir = opendir(".");
+	dir = opendir(".");
 
-    if (!dir)
-    {
-        printf("opendir: error");
-        return (-1);
-    }
+	if (!dir)
+		return (-1);
 
-    while ((entry = readdir(dir)))
-    {   
-        if (entry->d_name[0] == '.')
-            continue;
-        printf("%s  ", entry->d_name);
-    }
-    printf("\n");
+	while ((entry = readdir(dir)))
+	{
+		if (entry->d_name[0] == '.')
+			continue;
+		printf("%s  ", entry->d_name);
+	}
 
-    free(entry);
-    free(dir);
+	printf("\n");
 
-    return (0);
+	free(entry);
+	free(dir);
+
+	return (0);
 }
