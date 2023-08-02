@@ -2,13 +2,12 @@
 #include <dirent.h>
 #include <string.h>
 
-int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
+int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 {
     struct dirent *entry;
     DIR *dir;
-    int envp_i = 0;
 
-    dir = opendir('.');
+    dir = opendir(".");
 
     if (!dir)
     {
