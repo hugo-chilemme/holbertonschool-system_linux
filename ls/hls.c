@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <unistd.h>
 
 void checkPath(char *program_name, char *path)
 {
@@ -17,11 +16,7 @@ void checkPath(char *program_name, char *path)
 		fprintf(stderr, "%s: cannot access %s: No such file or directory\n", program_name, path);
 		return;
 	}
-	if (access(path, R_OK) != 0)
-	{
-		fprintf(stderr, "%s: cannot open directory %s: Permission denied\n", program_name, path);
-		return;
-	}
+	
 }
 /**
  * showDirectory - Display all folders and file a repository
