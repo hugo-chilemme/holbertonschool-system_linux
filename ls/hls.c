@@ -7,9 +7,9 @@
 /**
  * showDirectory - Display all folders and file a repository
  * @path: the target repository
- * Return: Nothing
+ * Return: error code, 0 success
  */
-void showDirectory(char *path)
+void showDirectory(char *program_name, char *path)
 {
 	struct dirent *entry;
 	DIR *dir;
@@ -19,7 +19,7 @@ void showDirectory(char *path)
 
 	if (!dir)
 	{
-		printf("%s\n", path);
+		fprintf(stderr, "%s: cannot access %s: No such file or directory\n", program_name, path);
 		return;
 	}
 	while ((entry = readdir(dir)))
@@ -45,6 +45,7 @@ void showDirectory(char *path)
 int main(int argc, char *argv[])
 {
 	int argv_i = 1;
+	char *program_name = argv[0];
 
 	if (argc > 1)
 	{
@@ -54,7 +55,7 @@ int main(int argc, char *argv[])
 			if (argc > 2)
 				printf("%s:\n", argv[argv_i]);
 
-			showDirectory(argv[argv_i]);
+			showDirectory(program_name, argv[argv_i]);
 
 			/** Display another backspace when he have multiple repository */
 			if (argv_i != argc - 1)
@@ -63,7 +64,7 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 
-	showDirectory(".");
+	showDirectory(program_name, ".");
 
 	return (0);
 }
