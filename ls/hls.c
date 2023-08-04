@@ -18,7 +18,7 @@ void checkPath(char *program_name, char *path)
 	}
 	if (!(buffer.st_mode & S_IRUSR))
 	{
-		fprintf(stderr, "%s: cannot open directory '%s': Permission denied\n", program_name, path);
+		fprintf(stderr, "%s: cannot open directory %s: Permission denied\n", program_name, path);
 		exit(EXIT_FAILURE);
 	}
 
