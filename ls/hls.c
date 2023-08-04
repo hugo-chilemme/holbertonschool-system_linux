@@ -14,7 +14,12 @@ void checkPath(char *program_name, char *path)
 	if (status == -1)
 	{
 		fprintf(stderr, "%s: cannot access %s: No such file or directory\n", program_name, path);
-		return;
+		exit(EXIT_FAILURE);
+	}
+	if (!(buffer.st_mode & S_IRUSR))
+	{
+		fprintf(stderr, "%s: cannot open directory '%s': Permission denied\n", program_name, path);
+		exit(EXIT_FAILURE);
 	}
 	
 }
@@ -28,6 +33,7 @@ void showDirectory(char *path, int showPath, int backspace)
 	struct dirent *entry;
 	DIR *dir;
 	int count = 0;
+	char *files[2000];
 
 	dir = opendir(path);
 
@@ -41,8 +47,14 @@ void showDirectory(char *path, int showPath, int backspace)
 	{
 		if (entry->d_name[0] == '.')
 			continue;
-		printf("%s  ", entry->d_name);
+		files[count] = entry->d_name;
 		count++;
+	}
+
+	while (count > 0)
+	{
+		count--;
+		printf("%s  ", files[count]);
 	}
 
 	free(entry);
