@@ -27,7 +27,7 @@ int listFiles(char *path)
 	{
 
 
-		printf("./hls: cannot access %s: No such file or directory\n", path);
+		fprintf(stderr, "hls: cannot access %s: No such file or directory\n", path);
 		return (0);
 	}
 
