@@ -12,10 +12,21 @@ int listFiles(char *path)
 {
 	DIR *dir;
 	struct dirent *entry;
+    struct stat file_info;
+
+	lstat(path, &file_info);
+
+	if (S_ISREG(file_info.st_mode))
+	{
+		printf("%s\n", path);
+		return (1);
+	}
 
 	dir = opendir(path);
 	if (dir == NULL)
 	{
+
+
 		printf("./hls: cannot access %s: No such file or directory\n", path);
 		return (0);
 	}
