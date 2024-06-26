@@ -6,15 +6,12 @@ int statusPath(char *path)
 {
 	struct stat file_info;
 
-	// if file does not exist
 	if (lstat(path, &file_info) == -1)
 		return (0);
 	
-	// if file is a file
 	if (lstat(path, &file_info) == 0 && S_ISREG(file_info.st_mode))
 		return (2);
 
-	// if file is a directory
 	return (1);
 }
 /**
@@ -89,7 +86,7 @@ int main(int argc, char *argv[])
 		}
 
 		printf("\n");
-		
+
 		listFiles(argv[index], countArgs, separator);
 
 
