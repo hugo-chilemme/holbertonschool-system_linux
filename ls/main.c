@@ -85,7 +85,8 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
-		printf("\n");
+		if (index > 1)
+			printf("\n");
 
 		listFiles(argv[index], countArgs, separator);
 
