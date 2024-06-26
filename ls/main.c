@@ -16,14 +16,16 @@ int main(int argc, char *argv[])
 
 	for (; index < argc; index++)
 	{
-		if (strcmp(argv[index], "-1") == 0)
-		{
-			separator = "\n";
-		} 
-
 		if (argv[index][0] != '-')
 		{
 			countArgs++;
+		}
+		else
+		{
+			if (argv[index][1] == '1')
+			{
+				separator = "\n";
+			}
 		}
 	}
 
