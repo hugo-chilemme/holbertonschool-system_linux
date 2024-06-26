@@ -1,11 +1,13 @@
 #include "imports.h"
 
-
-#include <dirent.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+/**
+ * listFiles - list files in a directory
+ * @path: path to the directory
+ *
+ * This function lists all the files in the specified directory.
+ *
+ * Return: 1 on success, 0 on failure
+ */
 int listFiles(char *path)
 {
 	DIR *dir;

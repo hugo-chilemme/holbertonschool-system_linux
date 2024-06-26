@@ -1,5 +1,5 @@
 # ifndef IMPORTS
-# define IMPOTS
+# define IMPORTS
 
 #include <stdlib.h>
 #include <stdio.h>
