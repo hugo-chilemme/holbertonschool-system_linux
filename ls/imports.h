@@ -9,6 +9,6 @@
 #include <sys/types.h>
 #include <stdarg.h>
 
-int listFiles(char *path, char *execn, const int MUL_ARGS);
+int listFiles(char *path, char *execn, const int MUL_ARGS, const char *separator);
 
 # endif

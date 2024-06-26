@@ -9,20 +9,45 @@ int main(int argc, char *argv[])
 {
 	int index = 1;
 	char *path_name = argv[0];
-	const int MUL_ARGS = argc > 2;
 
-	if (argc == 1)
-	{
-		return (listFiles(".", path_name, MUL_ARGS));
-	}
+	int countArgs = 0;
+	char *separator = "  ";
+
 
 	for (; index < argc; index++)
 	{
-		listFiles(argv[index], path_name, MUL_ARGS);
-		if (argc > 2 && argc - 1 != index)
+		if (strcmp(argv[index], "-1") == 0)
+		{
+			separator = "\n";
+		} 
+
+		if (argv[index][0] != '-')
+		{
+			countArgs++;
+		}
+	}
+
+	if (argc == 1)
+	{
+		return (listFiles(".", path_name, countArgs > 2, separator));
+	}
+
+	index = 1;
+
+	for (; index < argc; index++)
+	{
+		if (argv[index][0] == '-')
+		{
+			continue;
+		}
+
+		listFiles(argv[index], path_name, countArgs > 2, separator);
+
+		if (countArgs > 2 && argc - 1 != index)
 		{
 			printf("\n");
 		}
+
 	}
 
 	return (0);

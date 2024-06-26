@@ -8,7 +8,7 @@
  *
  * Return: 1 on success, 0 on failure
  */
-int listFiles(char *path, char *execn, const int MUL_ARGS)
+int listFiles(char *path, char *execn, const int MUL_ARGS, const char *separator)
 {
 	DIR *dir;
 	struct dirent *entry;
@@ -44,7 +44,7 @@ int listFiles(char *path, char *execn, const int MUL_ARGS)
 	{
 		if (entry->d_name[0] != '.')
 		{
-			printf("%s  ", entry->d_name);
+			printf("%s%s", entry->d_name, separator);
 		}
 	}
 
