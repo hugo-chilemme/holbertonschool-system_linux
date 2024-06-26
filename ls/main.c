@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
 	if (argc == 1)
 	{
-		return (listFiles(".", path_name, countArgs, separator));
+		return (listFiles(".", countArgs, separator));
 	}
 
 	index = 1;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 		{
 			continue;
 		}
-		listFiles(argv[index], path_name, countArgs, separator);
+		listFiles(argv[index], countArgs, separator);
 
 		checkStatusPath = statusPath(argv[index], path_name);
 		if (countArgs >= 2 && checkStatusPath == 1 && index < argc - 1)

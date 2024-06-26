@@ -8,33 +8,15 @@
  *
  * Return: 1 on success, 0 on failure
  */
-int listFiles(char *path, char *execn, const int MUL_ARGS, const char *separator)
+int listFiles(char *path, const int MUL_ARGS, const char *separator)
 {
 	DIR *dir;
 	struct dirent *entry;
-	struct stat file_info;
-	const char *M_ERR_FNF = "No such file or directory";
-
-	if (path == NULL)
-	{
-		fprintf(stderr, "%s: cannot access %s: %s\n", execn, path, M_ERR_FNF);
-		return (0);
-	}
-
 
 	dir = opendir(path);
 	if (dir == NULL)
 	{
-		if (lstat(path, &file_info) == -1)
-		{
-			closedir(dir);
-			return (0);
-		}
-		if (lstat(path, &file_info) == 0 || S_ISREG(file_info.st_mode))
-		{
-			printf("%s\n", path);
-			return (2);
-		} 
+		return (0);
 	}
 
 	if (MUL_ARGS > 1)
