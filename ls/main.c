@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 		{
 			printf("\n");
 		} 
-		else if (printedFolder > 0 && index == 0)
+		else if (printedFolder > 1 && index != 0)
 		{
 			printf("\n");
 		}	
