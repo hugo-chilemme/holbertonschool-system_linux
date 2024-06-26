@@ -9,19 +9,16 @@ int main(int argc, char *argv[])
 {
 	int index = 1;
 	char *path_name = argv[0];
+	const int MUL_ARGS = argc > 2;
 
 	if (argc == 1)
 	{
-		return (listFiles(".", path_name));
+		return (listFiles(".", path_name, MUL_ARGS));
 	}
 
 	for (; index < argc; index++)
 	{
-		if (argc > 2)
-		{
-			printf("%s:\n", argv[index]);
-		}
-		listFiles(argv[index], path_name);
+		listFiles(argv[index], path_name, MUL_ARGS);
 		if (argc > 2 && argc - 1 != index)
 		{
 			printf("\n");

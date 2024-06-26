@@ -8,11 +8,14 @@
  *
  * Return: 1 on success, 0 on failure
  */
-int listFiles(char *path, char *executable_name)
+int listFiles(char *path, char *execn, const int MUL_ARGS)
 {
 	DIR *dir;
 	struct dirent *entry;
     struct stat file_info;
+	const char *M_ERR_FNF = "No such file or directory";
+
+	memset(&file_info, 0, sizeof(struct stat));
 
 	lstat(path, &file_info);
 
@@ -22,13 +25,18 @@ int listFiles(char *path, char *executable_name)
 		return (1);
 	}
 
+
 	dir = opendir(path);
 	if (dir == NULL)
 	{
-
-
-		fprintf(stderr, "%s: cannot access %s: No such file or directory\n", executable_name, path);
+		fprintf(stderr, "%s: cannot access %s: %s\n", execn, path, M_ERR_FNF);
+		closedir(dir);
 		return (0);
+	}
+
+	if (MUL_ARGS == 1)
+	{
+		printf("%s:\n", path);
 	}
 
 	while ((entry = readdir(dir)) != NULL)
