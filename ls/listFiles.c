@@ -8,7 +8,7 @@
  *
  * Return: 1 on success, 0 on failure
  */
-int listFiles(char *path)
+int listFiles(char *path, char *executable_name)
 {
 	DIR *dir;
 	struct dirent *entry;
@@ -27,7 +27,7 @@ int listFiles(char *path)
 	{
 
 
-		fprintf(stderr, "hls: cannot access %s: No such file or directory\n", path);
+		fprintf(stderr, "%s: cannot access %s: No such file or directory\n", executable_name, path);
 		return (0);
 	}
 

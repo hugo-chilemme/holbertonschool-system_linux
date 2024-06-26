@@ -9,6 +9,6 @@
 #include <sys/types.h>
 #include <stdarg.h>
 
-int listFiles(char *path);
+int listFiles(char *path, char *executable_name);
 
 # endif

@@ -8,10 +8,11 @@
 int main(int argc, char *argv[])
 {
 	int index = 1;
+	char *path_name = argv[0];
 
 	if (argc == 1)
 	{
-		return (listFiles("."));
+		return (listFiles(".", path_name));
 	}
 
 	for (; index < argc; index++)
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
 		{
 			printf("%s:\n", argv[index]);
 		}
-		listFiles(argv[index]);
+		listFiles(argv[index], path_name);
 		if (argc > 2 && argc - 1 != index)
 		{
 			printf("\n");
