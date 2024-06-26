@@ -2,7 +2,7 @@
 
 
 
-void listFilesOrdered(DIR *d, int isFirst)
+void listFilesOrdered(DIR *d)
 {
 	struct dirent *dir;
 
@@ -19,12 +19,9 @@ void listFilesOrdered(DIR *d, int isFirst)
 		return;
 	}
 	printf("%s", dir->d_name);
-	if (!isFirst)
-	{
-		printf("  ");
-	}
+	printf("  ");
 
-	listFilesOrdered(d, 0);
+	listFilesOrdered(d);
 }
 
 int listFiles(char *path)
@@ -38,7 +35,7 @@ int listFiles(char *path)
 		return (0);
 	}
 
-	listFilesOrdered(d, 1);
+	listFilesOrdered(d);
 
 	printf("\n");
 

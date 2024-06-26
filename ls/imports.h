@@ -5,7 +5,7 @@
 #include <dirent.h>
 #include <string.h>
 
-void listFilesOrdered(DIR *d, int isFirst);
+void listFilesOrdered(DIR *d);
 int listFiles(char *path);
 
 # endif
