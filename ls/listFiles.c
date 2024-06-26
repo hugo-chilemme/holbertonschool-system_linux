@@ -25,14 +25,17 @@ int listFiles(char *path, char *execn, const int MUL_ARGS, const char *separator
 	dir = opendir(path);
 	if (dir == NULL)
 	{
+		if (lstat(path, &file_info) == -1)
+		{
+			fprintf(stderr, "%s: cannot access %s: %s\n", execn, path, M_ERR_FNF);
+			closedir(dir);
+			return (0);
+		}
 		if (lstat(path, &file_info) == 0 || S_ISREG(file_info.st_mode))
 		{
 			printf("%s\n", path);
 			return (1);
-		}
-		fprintf(stderr, "%s: cannot access %s: %s\n", execn, path, M_ERR_FNF);
-		closedir(dir);
-		return (0);
+		} 
 	}
 
 	if (MUL_ARGS > 1)
