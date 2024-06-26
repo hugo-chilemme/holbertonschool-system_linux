@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 	if (argc == 1)
 	{
-		return (listFiles(".", path_name, countArgs > 2, separator));
+		return (listFiles(".", path_name, countArgs, separator));
 	}
 
 	index = 1;
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
-		listFiles(argv[index], path_name, countArgs > 2, separator);
+		listFiles(argv[index], path_name, countArgs, separator);
 
 		if (countArgs > 2 && argc - 1 != index)
 		{

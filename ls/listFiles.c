@@ -35,7 +35,7 @@ int listFiles(char *path, char *execn, const int MUL_ARGS, const char *separator
 		return (0);
 	}
 
-	if (MUL_ARGS == 1)
+	if (MUL_ARGS > 1)
 	{
 		printf("%s:\n", path);
 	}
