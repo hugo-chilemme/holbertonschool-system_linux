@@ -7,6 +7,8 @@ int listFiles(char *path)
 {
 	struct dirent **namelist;
 	int n;
+	int i = 0;
+
 	n = scandir(path, &namelist, NULL, alphasort);
 	if (n < 0)
 	{
@@ -14,7 +16,7 @@ int listFiles(char *path)
 		return (0);
 	}
 
-	for (int i = 0; i < n; i++)
+	for (; i < n; i++)
 	{
 		if (strcmp(namelist[i]->d_name, ".") == 0 || strcmp(namelist[i]->d_name, "..") == 0)
 		{
