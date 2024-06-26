@@ -86,9 +86,16 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
+
 		printedFolder += 1;
-		if (printedFolder > 1)
+		if (separator[0] == ' ' && printedFolder > 1)
+		{
 			printf("\n");
+		} 
+		else if (printedFolder > 0)
+		{
+			printf("\n");
+		}	
 
 		listFiles(argv[index], countArgs, separator);
 
