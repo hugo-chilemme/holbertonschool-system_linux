@@ -21,7 +21,7 @@ int listFiles(char *path, char *execn, const int MUL_ARGS)
 		return (0);
 	}
 
-	if (stat(path, &file_info) == -1 || S_ISREG(file_info.st_mode))
+	if (lstat(path, &file_info) == -1 || S_ISREG(file_info.st_mode))
 	{
 		printf("%s\n", path);
 		return (1);
