@@ -16,7 +16,7 @@ int listFiles(char *path)
 	dir = opendir(path);
 	if (dir == NULL)
 	{
-		perror("opendir");
+		printf("./hls: cannot access %s: No such file or directory\n", path);
 		return (0);
 	}
 
@@ -28,8 +28,7 @@ int listFiles(char *path)
 		}
 	}
 
-	closedir(dir);
 	printf("\n");
-
+	closedir(dir);
 	return (1);
 }

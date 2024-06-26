@@ -7,9 +7,25 @@
  */
 int main(int argc, char *argv[])
 {
+	int index = 1;
+
 	if (argc == 1)
 	{
 		return (listFiles("."));
 	}
-	return (listFiles(argv[1]));
+
+	for (; index < argc; index++)
+	{
+		if (argc > 2)
+		{
+			printf("%s:\n", argv[index]);
+		}
+		listFiles(argv[index]);
+		if (argc > 2 && argc - 1 != index)
+		{
+			printf("\n");
+		}
+	}
+
+	return (0);
 }
