@@ -2,44 +2,32 @@
 
 
 
-void listFilesOrdered(DIR *d)
-{
-	struct dirent *dir;
-
-	dir = readdir(d);
-
-	if (dir == NULL)
-	{
-		closedir(d);
-		return;
-	}
-
-	if (dir->d_name[0] == '.')
-	{
-		return;
-	}
-	printf("%s", dir->d_name);
-	printf("  ");
-
-	listFilesOrdered(d);
-}
 
 int listFiles(char *path)
 {
-	DIR *d;
-
-	d = opendir(path);
-
-	if (!d)
+	struct dirent **namelist;
+	int n;
+	n = scandir(path, &namelist, NULL, alphasort);
+	if (n < 0)
 	{
+		perror("scandir");
 		return (0);
 	}
 
-	listFilesOrdered(d);
+	for (int i = 0; i < n; i++)
+	{
+		if (strcmp(namelist[i]->d_name, ".") == 0 || strcmp(namelist[i]->d_name, "..") == 0)
+		{
+			free(namelist[i]);
+			continue;
+		}
+
+		printf("%s  ", namelist[i]->d_name);
+		free(namelist[i]);
+	}
+	free(namelist);
 
 	printf("\n");
-
-	closedir(d);
 
 	return (1);
 }
