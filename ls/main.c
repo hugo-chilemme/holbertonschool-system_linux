@@ -23,6 +23,7 @@ int statusPath(char *path)
 int main(int argc, char *argv[])
 {
 	int index = 1;
+	int printedFolder = 0;
 
 	int countArgs = 0;
 	const char *M_ERR_FNF = "No such file or directory";
@@ -85,7 +86,8 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
-		if (index > 1)
+		printedFolder =+ 1;
+		if (printedFolder > 1)
 			printf("\n");
 
 		listFiles(argv[index], countArgs, separator);
