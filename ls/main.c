@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
-		printedFolder =+ 1;
+		printedFolder += 1;
 		if (printedFolder > 1)
 			printf("\n");
 
