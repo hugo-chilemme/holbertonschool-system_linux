@@ -64,10 +64,10 @@ int main(int argc, char *argv[])
 		{
 			continue;
 		}
+		listFiles(argv[index], path_name, countArgs, separator);
 
 		checkStatusPath = statusPath(argv[index], path_name);
-
-		if (countArgs > 2 && checkStatusPath == 1)
+		if (countArgs >= 2 && checkStatusPath == 1 && index < argc - 1)
 		{
 			printf("\n");
 		}
@@ -75,11 +75,7 @@ int main(int argc, char *argv[])
 		if (checkStatusPath == 2 || checkStatusPath == 0)
 			continue;
 
-		listFiles(argv[index], path_name, countArgs, separator);
-
-
 	}
 
-	printf("\n");
 	return (0);
 }

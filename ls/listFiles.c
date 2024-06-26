@@ -51,6 +51,11 @@ int listFiles(char *path, char *execn, const int MUL_ARGS, const char *separator
 		}
 	}
 
+	if (separator[0] == ' ')
+	{
+		printf("\n");
+	}
+
 
 	closedir(dir);
 	return (1);
