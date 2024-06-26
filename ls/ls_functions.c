@@ -1,34 +1,32 @@
 #include "imports.h"
 
 
-
+#include <dirent.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int listFiles(char *path)
 {
-	struct dirent **namelist;
-	int n;
-	int i = 0;
+	DIR *dir;
+	struct dirent *entry;
 
-	n = scandir(path, &namelist, NULL, alphasort);
-	if (n < 0)
+	dir = opendir(path);
+	if (dir == NULL)
 	{
-		perror("scandir");
+		perror("opendir");
 		return (0);
 	}
 
-	for (; i < n; i++)
+	while ((entry = readdir(dir)) != NULL)
 	{
-		if (strcmp(namelist[i]->d_name, ".") == 0 || strcmp(namelist[i]->d_name, "..") == 0)
+		if (entry->d_name[0] != '.')
 		{
-			free(namelist[i]);
-			continue;
+			printf("%s  ", entry->d_name);
 		}
-
-		printf("%s  ", namelist[i]->d_name);
-		free(namelist[i]);
 	}
-	free(namelist);
 
+	closedir(dir);
 	printf("\n");
 
 	return (1);
