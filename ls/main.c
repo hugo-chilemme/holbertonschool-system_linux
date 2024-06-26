@@ -1,4 +1,24 @@
 #include "imports.h"
+
+
+
+int statusPath(char *path, char *path_name)
+{
+	struct stat file_info;
+	const char *M_ERR_FNF = "No such file or directory";
+
+	if (lstat(path, &file_info) == -1)
+	{
+		fprintf(stderr, "%s: cannot access %s: %s\n", path_name, path, M_ERR_FNF);
+		return (0);
+	}
+	if (lstat(path, &file_info) == 0 && S_ISREG(file_info.st_mode))
+	{
+		printf("%s\n", path);
+		return (2);
+	}
+	return (1);
+}
 /**
  * main - entry point
  * @argc: number of arguments
@@ -12,6 +32,7 @@ int main(int argc, char *argv[])
 
 	int countArgs = 0;
 	char *separator = "  ";
+	int checkStatusPath = 0;
 
 
 	for (; index < argc; index++)
@@ -38,19 +59,27 @@ int main(int argc, char *argv[])
 
 	for (; index < argc; index++)
 	{
+
 		if (argv[index][0] == '-')
 		{
 			continue;
 		}
 
-		listFiles(argv[index], path_name, countArgs, separator);
+		checkStatusPath = statusPath(argv[index], path_name);
 
-		if (countArgs > 1)
+		if (countArgs > 2 && checkStatusPath == 1)
 		{
 			printf("\n");
 		}
 
+		if (checkStatusPath == 2 || checkStatusPath == 0)
+			continue;
+
+		listFiles(argv[index], path_name, countArgs, separator);
+
+
 	}
 
+	printf("\n");
 	return (0);
 }
