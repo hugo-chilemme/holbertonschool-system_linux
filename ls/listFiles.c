@@ -27,7 +27,6 @@ int listFiles(char *path, char *execn, const int MUL_ARGS, const char *separator
 	{
 		if (lstat(path, &file_info) == -1)
 		{
-			fprintf(stderr, "%s: cannot access %s: %s\n", execn, path, M_ERR_FNF);
 			closedir(dir);
 			return (0);
 		}
