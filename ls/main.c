@@ -2,21 +2,19 @@
 
 
 
-int statusPath(char *path, char *path_name)
+int statusPath(char *path)
 {
 	struct stat file_info;
-	const char *M_ERR_FNF = "No such file or directory";
 
+	// if file does not exist
 	if (lstat(path, &file_info) == -1)
-	{
-		fprintf(stderr, "%s: cannot access %s: %s\n", path_name, path, M_ERR_FNF);
 		return (0);
-	}
+	
+	// if file is a file
 	if (lstat(path, &file_info) == 0 && S_ISREG(file_info.st_mode))
-	{
-		printf("%s\n", path);
 		return (2);
-	}
+
+	// if file is a directory
 	return (1);
 }
 /**
@@ -28,10 +26,11 @@ int statusPath(char *path, char *path_name)
 int main(int argc, char *argv[])
 {
 	int index = 1;
-	char *path_name = argv[0];
 
 	int countArgs = 0;
+	const char *M_ERR_FNF = "No such file or directory";
 	char *separator = "  ";
+	char *path_name = argv[0];
 	int checkStatusPath = 0;
 
 
@@ -39,15 +38,33 @@ int main(int argc, char *argv[])
 	{
 		if (argv[index][0] != '-')
 		{
+
+			checkStatusPath = statusPath(argv[index]);
+
+			if (checkStatusPath == 0)
+				fprintf(stderr, "%s: cannot access %s: %s\n", path_name, argv[index], M_ERR_FNF);
+
 			countArgs++;
 		}
 		else
 		{
 			if (argv[index][1] == '1')
-			{
 				separator = "\n";
-			}
 		}
+	}
+
+	index = 1;
+
+	for (; index < argc; index++)
+	{
+		if (argv[index][0] != '-')
+		{
+			checkStatusPath = statusPath(argv[index]);
+
+			if (checkStatusPath == 2)
+				printf("%s\n", argv[index]);
+		}
+
 	}
 
 	if (argc == 1)
@@ -59,21 +76,22 @@ int main(int argc, char *argv[])
 
 	for (; index < argc; index++)
 	{
-
 		if (argv[index][0] == '-')
 		{
 			continue;
 		}
-		listFiles(argv[index], countArgs, separator);
 
-		checkStatusPath = statusPath(argv[index], path_name);
-		if (countArgs >= 2 && checkStatusPath == 1 && index < argc - 1)
-		{
-			printf("\n");
-		}
+		checkStatusPath = statusPath(argv[index]);
 
 		if (checkStatusPath == 2 || checkStatusPath == 0)
+		{
 			continue;
+		}
+
+		printf("\n");
+		
+		listFiles(argv[index], countArgs, separator);
+
 
 	}
 
