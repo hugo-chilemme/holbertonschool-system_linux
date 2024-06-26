@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
 		listFiles(argv[index], path_name, countArgs, separator);
 
-		if (countArgs > 2 && argc - 1 != index)
+		if (countArgs > 1)
 		{
 			printf("\n");
 		}
